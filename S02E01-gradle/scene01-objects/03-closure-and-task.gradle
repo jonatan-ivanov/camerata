@@ -1,0 +1,37 @@
+task tst { // What are these? :o
+    doLast {
+        println 'hi'
+    }
+}
+
+// // task tst // creates a task and adds it to the task list
+// task(tst) // https://docs.gradle.org/current/dsl/org.gradle.api.tasks.TaskContainer.html
+// println tst.class
+
+// task(tst) { // create(name, configureClosure)
+//     println it.class
+// }
+
+// task(tst({ println it.class })) // http://groovy-lang.org/closures.html
+
+// task tst
+// tst(this.&setUpTask)
+//
+// private void setUpTask(Task task) {
+//     println task.class
+// }
+
+// task tst
+// tst.doLast({ println 'hi from closure' })
+
+// task(tst({ it.doLast({ println 'hi from a closure from a closure' }) }))
+
+// task tst {
+//     doLast {
+//         println 'hi from a closure from a closure'
+//     }
+// }
+
+// task tst << {
+//     println 'does not work anymore, it was a shortcut for doLast'
+// }

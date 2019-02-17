@@ -1,0 +1,11 @@
+println this // https://docs.gradle.org/current/dsl/org.gradle.api.Script.html
+
+inspect(this)
+inspect(project)
+inspect(rootProject)
+inspect(gradle)
+
+private void inspect(def object) {
+    // https://github.com/jonatan-ivanov/groovy-training/blob/master/examples/065_Inspect.groovy
+    groovy.inspect.swingui.ObjectBrowser.inspect(object)
+}

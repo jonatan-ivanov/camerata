@@ -1,0 +1,3 @@
+// apply from: '01-inspect.gradle'
+// apply from: '02-setter.gradle'
+// apply from: '03-closure-and-task.gradle'
