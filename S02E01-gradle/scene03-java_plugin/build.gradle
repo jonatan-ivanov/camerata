@@ -30,3 +30,8 @@ dependencies {
 
 // Define the main class for the application
 mainClassName = 'io.github.camerata.App'
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = new groovy.json.JsonSlurper().parseText('https://services.gradle.org/versions/current'.toURL().text).version
+}
