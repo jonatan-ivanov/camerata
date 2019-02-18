@@ -1,7 +1,8 @@
 plugins {
     id 'application' //brings in the java and the distribution plugins
-    id 'idea'
 }
+
+apply from: 'gradle/idea.gradle'
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -11,6 +12,11 @@ repositories {
     jcenter() // should be the superset of mavenCentral()
 }
 dependencies {
+    annotationProcessor 'org.projectlombok:lombok:1.+'
+    compileOnly 'org.projectlombok:lombok:1.+'
+
+    implementation 'ch.qos.logback:logback-classic:1.2.+' // native implementation of https://www.slf4j.org/manual.html
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.+'
     testImplementation 'org.mockito:mockito-junit-jupiter:2.+'
     testImplementation 'org.assertj:assertj-core:3.+'

@@ -1,0 +1,11 @@
+apply plugin: 'idea'
+
+idea.project {
+    // Turn annotation processing on
+    ipr.withXml { provider ->
+        def compilerConfig = provider.asNode().component.find { it.'@name' == 'CompilerConfiguration' }
+        compilerConfig.annotationProcessing.replaceNode {
+            annotationProcessing { profile(default: true, name: 'Default', enabled: true) }
+        }
+    }
+}
