@@ -1,6 +1,7 @@
 plugins {
     id 'application' //brings in the java and the distribution plugins
     id 'project-report'
+    id 'build-dashboard'
 }
 
 apply from: 'gradle/idea.gradle'
