@@ -22,6 +22,10 @@ test {
     useJUnitPlatform()
 }
 
+task cleanAll {
+    dependsOn clean, cleanIdea, cleanIdeaWorkspace
+}
+
 wrapper {
     distributionType = Wrapper.DistributionType.ALL
     gradleVersion = new groovy.json.JsonSlurper().parseText('https://services.gradle.org/versions/current'.toURL().text).version
