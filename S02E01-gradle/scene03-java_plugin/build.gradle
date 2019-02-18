@@ -18,6 +18,19 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.+'
 }
 
+dependencyLocking {
+    lockAllConfigurations()
+}
+
+task resolveAndLockAll {
+    doFirst {
+        assert gradle.startParameter.writeDependencyLocks
+    }
+    doLast {
+        configurations.findAll { it.canBeResolved }.each { it.resolve() }
+    }
+}
+
 test {
     useJUnitPlatform()
 }

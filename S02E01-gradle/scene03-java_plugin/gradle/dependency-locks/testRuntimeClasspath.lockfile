@@ -1,0 +1,15 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+net.bytebuddy:byte-buddy-agent:1.9.7
+net.bytebuddy:byte-buddy:1.9.7
+org.apiguardian:apiguardian-api:1.0.0
+org.assertj:assertj-core:3.11.1
+org.junit.jupiter:junit-jupiter-api:5.4.0
+org.junit.jupiter:junit-jupiter-engine:5.4.0
+org.junit.platform:junit-platform-commons:1.4.0
+org.junit.platform:junit-platform-engine:1.4.0
+org.mockito:mockito-core:2.24.0
+org.mockito:mockito-junit-jupiter:2.24.0
+org.objenesis:objenesis:2.6
+org.opentest4j:opentest4j:1.1.1
