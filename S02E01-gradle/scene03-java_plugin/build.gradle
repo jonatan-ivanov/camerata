@@ -3,6 +3,9 @@ plugins {
 }
 
 apply from: 'gradle/idea.gradle'
+apply from: 'gradle/dependency-lock.gradle'
+apply from: 'gradle/wrapper.gradle'
+apply from: 'gradle/clean.gradle'
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -24,28 +27,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.+'
 }
 
-dependencyLocking {
-    lockAllConfigurations()
-}
-
-task resolveAndLockAll {
-    doFirst {
-        assert gradle.startParameter.writeDependencyLocks
-    }
-    doLast {
-        configurations.findAll { it.canBeResolved }.each { it.resolve() }
-    }
-}
-
 test {
     useJUnitPlatform()
-}
-
-task cleanAll {
-    dependsOn clean, cleanIdea, cleanIdeaWorkspace
-}
-
-wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = new groovy.json.JsonSlurper().parseText('https://services.gradle.org/versions/current'.toURL().text).version
 }

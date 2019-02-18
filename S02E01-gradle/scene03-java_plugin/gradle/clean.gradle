@@ -1,0 +1,7 @@
+// java and idea plugins need to be added
+task cleanAll {
+    dependsOn clean, cleanIdea, cleanIdeaWorkspace
+    doLast {
+        delete 'out', '.idea'
+    }
+}
