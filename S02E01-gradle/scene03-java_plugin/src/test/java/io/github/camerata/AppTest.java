@@ -1,11 +1,12 @@
 package io.github.camerata;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
 
-public class AppTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+class AppTest {
     @Test
-    public void appShouldHaveGreeting() {
-        assertNotNull("app should have a greeting", new App().getGreeting());
+    void appShouldHaveGreeting() {
+        assertThat(new App().getGreeting()).isNotEmpty();
     }
 }
