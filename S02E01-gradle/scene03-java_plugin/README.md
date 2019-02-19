@@ -40,4 +40,9 @@
 - [Dependency Locking](https://docs.gradle.org/current/userguide/dependency_locking.html)
   - `gradlew resolveAndLockAll --write-locks`
   - [Netflix Nebula Gradle Dependency Lock Plugin](https://github.com/nebula-plugins/gradle-dependency-lock-plugin)
+- [Integration Tests](https://docs.gradle.org/current/userguide/java_testing.html)
+    - source set
+    - dependencies
+    - classpaths
+    - task
 - [Multi-Project Builds](https://docs.gradle.org/current/userguide/multi_project_builds.html)

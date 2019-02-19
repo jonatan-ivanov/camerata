@@ -1,0 +1,34 @@
+sourceSets {
+    integrationTest {
+        compileClasspath += sourceSets.main.output // or main.output + test.output
+        runtimeClasspath += sourceSets.main.output // or main.output + test.output
+    }
+}
+configurations {
+    integrationTestAnnotationProcessor.extendsFrom testAnnotationProcessor // or annotationProcessor
+    integrationTestCompileOnly.extendsFrom testCompileOnly // or compileOnly
+    integrationTestImplementation.extendsFrom testImplementation // or implementation
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly // or runtimeOnly
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'Verification'
+
+    useJUnitPlatform()
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter test
+}
+check.dependsOn integrationTest
+
+idea.module {
+    testSourceDirs += sourceSets.integrationTest.java.srcDirs
+    testResourceDirs += sourceSets.integrationTest.resources.srcDirs
+    scopes.TEST.plus += [ configurations.integrationTestCompile ] // integrationTestImplementation?
+}

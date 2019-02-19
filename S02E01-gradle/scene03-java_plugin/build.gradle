@@ -5,6 +5,7 @@ plugins {
 }
 
 apply from: 'gradle/idea.gradle'
+apply from: 'gradle/test.gradle'
 apply from: 'gradle/dependency-lock.gradle'
 apply from: 'gradle/wrapper.gradle'
 apply from: 'gradle/clean.gradle'
@@ -22,13 +23,12 @@ dependencies {
 
     implementation 'ch.qos.logback:logback-classic:1.2.+' // native implementation of https://www.slf4j.org/manual.html
 
+    testAnnotationProcessor 'org.projectlombok:lombok:1.+'
+    testCompileOnly 'org.projectlombok:lombok:1.+'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.+'
     testImplementation 'org.mockito:mockito-junit-jupiter:2.+'
     testImplementation 'org.assertj:assertj-core:3.+'
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.+'
-}
-
-test {
-    useJUnitPlatform()
 }
