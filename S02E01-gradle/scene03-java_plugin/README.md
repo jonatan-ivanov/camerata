@@ -45,4 +45,10 @@
     - dependencies
     - classpaths
     - task
+- [The JaCoCo Plugin](https://docs.gradle.org/current/userguide/jacoco_plugin.html)
+    - [JacocoPluginExtension](https://docs.gradle.org/current/dsl/org.gradle.testing.jacoco.plugins.JacocoPluginExtension.html)
+    - [JacocoTaskExtension](https://docs.gradle.org/current/dsl/org.gradle.testing.jacoco.plugins.JacocoTaskExtension.html)
+    - [JacocoReport](https://docs.gradle.org/current/dsl/org.gradle.testing.jacoco.tasks.JacocoReport.html)
+    - [JacocoMerge](https://docs.gradle.org/current/dsl/org.gradle.testing.jacoco.tasks.JacocoMerge.html)
+    - [JacocoCoverageVerification](https://docs.gradle.org/current/dsl/org.gradle.testing.jacoco.tasks.JacocoCoverageVerification.html)
 - [Multi-Project Builds](https://docs.gradle.org/current/userguide/multi_project_builds.html)
