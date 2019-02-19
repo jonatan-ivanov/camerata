@@ -35,3 +35,20 @@ task tst { // What are these? :o
 // task tst << {
 //     println 'does not work anymore, it was a shortcut for doLast'
 // }
+
+// task tst {
+//     println 'a'
+//     doFirst {
+//         println 'b'
+//     }
+//     doFirst {
+//         println 'c'
+//     }
+//     doLast {
+//         println 'd'
+//     }
+//     doLast {
+//         println 'e'
+//     }
+//     println 'f'
+// }
