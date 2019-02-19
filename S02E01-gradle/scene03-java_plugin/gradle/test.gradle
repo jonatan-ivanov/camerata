@@ -1,3 +1,5 @@
+apply plugin: 'jacoco'
+
 sourceSets {
     integrationTest {
         compileClasspath += sourceSets.main.output // or main.output + test.output
@@ -13,22 +15,79 @@ configurations {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
+jacocoTestReport.dependsOn test // weird, but this is needed :(
 
 task integrationTest(type: Test) {
+    shouldRunAfter test
     description = 'Runs the integration tests.'
     group = 'Verification'
 
     useJUnitPlatform()
-
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
     classpath = sourceSets.integrationTest.runtimeClasspath
-    shouldRunAfter test
+    jacoco.destinationFile = file("$buildDir/jacoco/integrationTest.exec")
 }
 check.dependsOn integrationTest
+
+task jacocoIntegrationTestReport(type: JacocoReport) {
+    dependsOn integrationTest
+    executionData integrationTest
+    sourceSets sourceSets.main
+    reports.html.destination file("$reportsDir/jacoco/integrationTest/html")
+}
+integrationTest.finalizedBy jacocoIntegrationTestReport
+
+task jacocoMerge(type: JacocoMerge) {
+    dependsOn jacocoTestReport, jacocoIntegrationTestReport
+    destinationFile = file("$buildDir/jacoco/merged.exec")
+    gradle.taskGraph.whenReady {
+        // only merge reports of tests which actually ran (not excluded)
+        // this is a hack, JacocoMerge should provide an allowMissing option for .exec files
+        tasks.withType(Test).findAll { gradle.taskGraph.hasTask(it) && it.enabled }.each { executionData(it) }
+    }
+}
+
+task mergedReport(type: JacocoReport) {
+    dependsOn jacocoMerge
+    executionData jacocoMerge.destinationFile
+    sourceDirectories.from files(sourceSets.main.java.srcDirs)
+    classDirectories.from sourceSets.main.output.classesDirs
+}
+
+jacocoTestCoverageVerification {
+    dependsOn test
+    executionData jacocoTestReport.executionData
+    sourceDirectories.from jacocoTestReport.sourceDirectories
+    classDirectories.from jacocoTestReport.classDirectories
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80
+            }
+        }
+    }
+}
+check.dependsOn jacocoTestCoverageVerification
+
+task jacocoMergedCoverageVerification(type: JacocoCoverageVerification) {
+    dependsOn mergedReport
+    executionData mergedReport.executionData
+    sourceDirectories.from mergedReport.sourceDirectories
+    classDirectories.from mergedReport.classDirectories
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.95
+            }
+        }
+    }
+}
+check.dependsOn jacocoMergedCoverageVerification
 
 idea.module {
     testSourceDirs += sourceSets.integrationTest.java.srcDirs
     testResourceDirs += sourceSets.integrationTest.resources.srcDirs
-    scopes.TEST.plus += [ configurations.integrationTestCompile ] // integrationTestImplementation?
+    scopes.TEST.plus += [ configurations.integrationTestCompile ] // TODO: integrationTestImplementation?
 }

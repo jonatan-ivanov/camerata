@@ -6,7 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class AppTest {
     @Test
-    void appShouldHaveGreeting() {
-        assertThat(new App().getGreeting()).isNotEmpty();
+    void appShouldGreetYouProperly() {
+        assertThat(new App().getGreeting()).isEqualTo("Hello world! :)");
+    }
+
+    @Test
+    void youShouldFeelLucky() {
+        assertThat(new App().imFeelingLucky()).isNotEmpty();
     }
 }
