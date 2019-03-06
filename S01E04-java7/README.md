@@ -1,6 +1,10 @@
 # Java 7
 
 - `AutoCloseable`, automatic resource management, try-with-resource
+    1. close()
+    1. try-with-resource
+    1. `FileInputStream`
+    1. `Files`
 - Multi-catch
 - `invokedynamic`
 - Diamond Operator
