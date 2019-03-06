@@ -10,21 +10,21 @@ public class App {
     public static void main(String[] args) throws IOException {
         brokenRead();
     }
-    
-    static void brokenRead() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(getGreetingsAsStream()));
-        String line = bufferedReader.readLine();
+
+    private static void brokenRead() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(getGreetingsAsStream()));
+        String line = br.readLine();
         while (line != null) {
             System.out.println(line);
-            line = bufferedReader.readLine();
+            line = br.readLine();
         }
     }
 
-    static InputStream getGreetingsAsStream() {
+    private static InputStream getGreetingsAsStream() {
         return new ByteArrayInputStream(getGreetings().getBytes());
     }
 
-    static String getGreetings() {
+    private static String getGreetings() {
         return "Hello world.\nHello darkness my old friend.";
     }
 }
