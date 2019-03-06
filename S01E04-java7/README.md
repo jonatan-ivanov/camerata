@@ -5,6 +5,7 @@
     1. try-with-resource
     1. `FileInputStream`
     1. `Files`
+    1. `IOUtils`, `FileUtils` ([commons-io](https://commons.apache.org/proper/commons-io/))
 - Multi-catch
 - `invokedynamic`
 - Diamond Operator
